@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aleo&family=Inter:wght@300;400;500;800&family=Manrope:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <title>DVC ID Generator</title>
+    <style>
+      @font-face {
+        font-family: "ClarendonBT"; /* Specify a unique font family name */
+        src: url("./fonts/ClarendonBT-Black.otf") format("woff2");
+
+        /* Add additional font formats if necessary */
+      }
+      body {
+        font-family: "Aleo", serif;
+        background-color: antiquewhite;
+      }
+      .id-card {
+        width: 337px;
+        height: 530px;
+       
+      }
+
+      .profile-image {
+        width: 52%;
+        height: 33.6%;
+        object-fit: cover;
+        border-radius: 7px;
+        position: absolute;
+        border: 2px solid black;
+        top: 36.9%;
+        left: 25%;
+      }
+      #studentID {
+        font-size: 30px;
+        text-align: center;
+      }
+      #studentName {
+        text-align: center;
+        font-size: 46px;
+        font-family: "ClarendonBT";
+      }
+      .name {
+        position: absolute;
+        width: 100%;
+        bottom: 19.2%;
+      }
+      .idnumber {
+        position: absolute;
+        width: 100%;
+        bottom: 8.2%;
+      }
+      .signature {
+        filter: grayscale(100%);
+      }
+      .sig-con img {
+        width: 200px;
+
+        align-items: center;
+      }
+      .sig-con {
+        width: 100%;
+        height: 158px;
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+      .bg {
+        width: 100%;
+      }
+      .bg-back {
+        width: 100%;
+        height: 100%;
+        background-image: url(./images/BACK.png);
+
+        z-index: 1;
+      }
+      .exportfront {
+        bottom: -10%;
+        left: 30%;
+      }
+      .exportback {
+        bottom: -10%;
+        left: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="mb-5 bg-success-subtle">
+      <nav>
+        <div class="container p-2">
+          <h3 class="text-center">DVC ID EDITOR</h3>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h3>Student Details</h3>
+          <div class="input-group">
+            <label for="">Full name</label>
+            <input type="text" />
+          </div>
+          <div class="input-group">
+            <label for="">Id number</label>
+            <input type="number" />
+          </div>
+          <div class="input-group">
+            <label for="">Birthday</label>
+            <input type="date" />
+          </div>
+          <div class="input-group">
+            <label for="">Course</label>
+            <input type="text" />
+          </div>
+          <div class="input-group">
+            <label for="">Guardian's name</label>
+            <input type="text" />
+          </div>
+          <div class="input-group">
+            <label for="">Contact Number</label>
+            <input type="text" />
+          </div>
+          <div class="input-group">
+            <label for="">Image </label>
+            <input type="file" />
+          </div>
+          <div class="input-group">
+            <label for="">Signature </label>
+            <input type="file" />
+          </div>
+        </div>
+        <div class="col-8 d-flex justify-content-evenly align-content-center">
+          <div id="idCard" class="id-card position-relative">
+            <img src="./images/FRONT.png" alt="" class="bg" />
+            <img
+              id="profileImage"
+              class="profile-image"
+              src="./kim.jpg"
+              alt="Profile Image"
+            />
+
+            <!-- <div class="name">
+              <h2 id="studentName">John Doe</h2>
+            </div>
+            <div class="idnumber">
+              <p id="studentID"></p>
+            </div>
+            <div class="sig-con">
+              <img
+                src="./signa.png"
+                alt="signature"
+                class="signature"
+                id="signature"
+              />
+            </div>  -->
+
+            <button
+              class="btn btn-secondary position-absolute exportfront"
+              onclick="exportAsImage()"
+            >
+              Export Front
+            </button>
+          </div>
+
+          <div id="idCard backid" class="id-card position-relative">
+            <img src="images/BACK.png" alt="" class="bg-back" />
+            <button class="btn btn-secondary position-absolute exportback">
+              Export Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button onclick="exportAsImage()">Export as Image</button> -->
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+      // Student data (replace this with actual data)
+      const studentData = {
+        name: "Kim Brian S. Tilandoca",
+        id: "ID No.: 000929",
+        // Add more fields as needed
+      };
+      var signatureImage = document.getElementById("signature");
+      signatureImage.src = "./signa.png";
+      function enhanceAndDisplay() {
+        // Create an image object to work with
+        var image = new Image();
+        image.src = signatureImage.src;
+
+        image.onload = function () {
+          // Enhance the signature
+          var enhancedDataURL = enhanceSignature(image);
+
+          // Display the enhanced image in another img tag
+          var enhancedSignatureImage = document.getElementById("signature");
+          enhancedSignatureImage.src = enhancedDataURL;
+        };
+      }
+      //orginal
+      // function enhanceSignature(image) {
+      //   var canvas = document.createElement("canvas");
+      //   var ctx = canvas.getContext("2d");
+      //   canvas.width = image.width;
+      //   canvas.height = image.height;
+
+      //   // Draw the image on the canvas
+      //   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      //   // Get image data
+      //   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      //   var data = imageData.data;
+
+      //   // Enhance signature lines (by making it more black)
+      //   for (var i = 0; i < data.length; i += 4) {
+      //           if (data[i + 3] > 0) {
+      //               // If the pixel is not transparent, add stroke by modifying RGB values
+      //               data[i] = 0;   // Red
+      //               data[i + 1] = 0; // Green
+      //               data[i + 2] = 0; // Blue
+      //           }
+      //       }
+
+      //   // Put the modified image data back to the canvas
+      //   ctx.drawImage(image, 1, 1, canvas.width, canvas.height);
+      //   ctx.drawImage( imageData, 1, 1, canvas.width, canvas.height);
+      //   ctx.drawImage(image, 1, 1, canvas.width, canvas.height);
+      //   ctx.putImageData(imageData, 0, 0);
+
+      //   return canvas.toDataURL("image/png");
+      // }
+
+      function enhanceSignature(image) {
+        // Create a canvas to work with
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        // Draw the original image on the canvas
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        // Get image data
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var data = imageData.data;
+
+        // Enhance signature lines (by making it more black)
+        for (var i = 0; i < data.length; i += 4) {
+          if (data[i + 3] > 0) {
+            // If the pixel is not transparent, make it completely black
+            data[i] = 0; // Red
+            data[i + 1] = 0; // Green
+            data[i + 2] = 0; // Blue
+          }
+        }
+
+        // Put the modified image data back to the canvas
+        ctx.putImageData(imageData, 0, 0);
+
+        // Create a temporary canvas to simulate a thicker stroke
+        var tempCanvas = document.createElement("canvas");
+        var tempCtx = tempCanvas.getContext("2d");
+        tempCanvas.width = image.width;
+        tempCanvas.height = image.height;
+
+        // Draw the modified image on the temporary canvas with an offset to simulate a thicker stroke
+        tempCtx.drawImage(canvas, 1, 1, canvas.width, canvas.height);
+        ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+        // Draw the modified image on the main canvas again to cover the original lines
+        ctx.drawImage(tempCanvas, 1, 1, canvas.width, canvas.height);
+
+        return canvas.toDataURL("image/png");
+      }
+
+      document.getElementById("profileImage").src = "./kim.jpg"; // Replace with the actual path
+      document.getElementById("studentName").innerText = studentData.name;
+      document.getElementById("studentID").innerText = `${studentData.id}`;
+      // Update other fields as needed
+
+      function exportAsImage() {
+        html2canvas(document.getElementById("idCard"), { scale: 3 }).then(
+          function (canvas) {
+            var img = canvas.toDataURL("image/png");
+            var link = document.createElement("a");
+            link.href = img;
+            link.download = `${studentData.name}.png`;
+            link.click();
+          }
+        );
+      }
+
+      window.onload = enhanceAndDisplay;
+    </script>
+  </body>
+</html>
