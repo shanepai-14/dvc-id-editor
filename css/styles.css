@@ -225,8 +225,8 @@ label {
     display: none;
   }
   .drop-zone {
-    max-width: 170px;
-    height: 170px;
+    width: 100%;
+    height: 90%;
     padding: 25px;
     display: flex;
     align-items: center;
@@ -271,4 +271,88 @@ label {
     font-size: 14px;
     text-align: center;
   }
+  footer {
+    background: var(--bg-color);
+    /* background: linear-gradient( 0deg, rgba(47, 97, 255, 1) 0%, rgba(77, 119, 255, 1) 100% ); */
+    color: var(--header-color);
+    padding-top: 56px;
+    padding-bottom: 56px;
+}
+.footer-logo .logo {
+    color: var(--bg);
+}
+.logo {
+    font-size: 24px;
+    color: var(--primary-color);
+    font-family: "Manrope";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.72px;
+}
+.footer-list .list-title {
+    margin-bottom: 36px !important;
+}
+.footer-list li {
+    margin-bottom: 15px;
+}
+.list-unstyled a {
+    color: var(--header-color);
+}
+
+.link {
+    text-decoration: none;
+}
+@media (max-width: 768px){
+    .display-container{
+        flex-direction: column;
+        justify-content: center!important;
+        
+       
+    }
+    .id-card{
+        margin: auto;
+        margin-bottom: 70px;
+    }
+    .details-card{
+        margin-bottom: 20px;
+    }
+}
+@keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+  }
   
+  /* ---------------- For Animation on Scroll ---------------- */
+  .slideanim {
+    visibility: hidden;
+    visibility: visible\9; /*For old IE browsers IE6-8 */
+  }
+  .slideanim.slide {
+    visibility: visible;
+    animation: slide 1s;
+  }
+  .slideanim::after {
+    /* useful when its child elements are float:left; */
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

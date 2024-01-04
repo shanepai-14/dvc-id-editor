@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="./js/float-panel.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Aleo&family=Inter:wght@300;400;500;800&family=Manrope:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
@@ -28,16 +29,16 @@
     <title>DVC ID Generator</title>
   </head>
   <body>
-    <header class="mb-5">
+    <header class="mb-5 ">
       <nav>
         <div class="container p-2">
-          <h3 class="text-center head-title">DVC ID EDITOR</h3>
+          <h3 class="text-center head-title slideanim">DVC ID EDITOR</h3>
         </div>
       </nav>
     </header>
-    <div class="container">
+    <div class="container " style="margin-bottom: 100px;">
       <div class="row">
-        <div class="col-md-4 details-card">
+        <div class="col-md-4 details-card slideanim">
           <h3>
             Student Details &nbsp&nbsp&nbsp&nbsp&nbsp<i
               class="bi bi-circle-fill"
@@ -191,9 +192,9 @@
               onchange="handleFiles(this.files, 'signatureImage')"
             />
           </div>
-          <div class="row d-flex w-100 justify-content-between">
+          <div class="row d-flex justify-content-between " style="width: 105%;">
          
-           <div class="col text-center">
+           <div class="col text-center p-2">
             <label for="" class="mb-1">Student Image</label>
             <div class="drop-zone" data-display-element-id="previewStudentImage">
              
@@ -201,7 +202,7 @@
               <input type="file" name="myFile" class="drop-zone__input" id="dragstudentimage">
             </div>
            </div>
-          <div class="col text-center"> 
+          <div class="col text-center p-2"> 
             <label for="" class="mb-1">Student Signature</label>
             <div class="drop-zone" data-display-element-id="previewSignatureImage">
               <span class="drop-zone__prompt">Drop file here or click to upload</span>
@@ -211,9 +212,9 @@
           </div>
         </div>
         <div
-          class="col-md-8 d-flex justify-content-evenly align-content-center"
+          class="col-md-8  d-flex justify-content-evenly align-content-center display-container"
         >
-          <div id="idCard" class="id-card position-relative">
+          <div id="idCard" class="id-card position-relative slideanim">
             <img src="./images/FRONT.png" alt="" class="bg" />
             <img
               id="previewStudentImage"
@@ -225,7 +226,7 @@
               <h2 id="displayname"></h2>
             </div>
             <div class="course-container">
-              <h2 id="displaycourse">BSIT</h2>
+              <h2 id="displaycourse"></h2>
             </div>
             <div class="idnumber-container">
               <p id="studentID"></p>
@@ -246,7 +247,7 @@
             </button>
           </div>
 
-          <div id="backid" class="id-card position-relative">
+          <div id="backid" class="id-card position-relative slideanim">
             <img src="images/BACK.png" alt="" class="bg-back" />
             <div class="school-year-container">
               <p class="display-school-year" id="display-school-year">
@@ -274,7 +275,35 @@
         </div>
       </div>
     </div>
-    <!-- <button onclick="exportAsImage()">Export as Image</button> -->
+    <footer>
+      <div class="container slideanim">
+        <div class="row">
+          <div class="col-sm-6  footer-logo mb-3">
+            <a href="" class="link logo">Shanepai</a>
+            <p>
+              I'm a quick learner and adaptable junior full-stack web developer, eager to contribute my growing front-end expertise in Html,Css,Javascript,Bootstrap and back-end fundamentals in PHP using Laravel Framework. While I'm still building my portfolio, I'm highly motivated to learn from experienced professionals and tackle real-world projects like designing clean user interfaces, managing data, and ensuring seamless integration. I'm confident that my passion and dedication will be valuable assets to your team.
+            </p>
+            <p>©Shanepai 2023. All rights reserved</p>
+          </div>
+        
+          <div class="col">
+            <ul class="list-unstyled footer-list">
+              <li class="list-title"><strong>Contacts</strong></li>
+              <li>shaneenriquez50@gmail.com</li>
+              <li>0991-373-1732</li>
+            </ul>
+          </div>
+          <div class="col">
+            <p style="margin-bottom: 36px;"><strong>Social Media</strong></p>
+            <ul class="list-unstyled footer-list d-flex gap-3">
+              <li><a href="https://www.facebook.com/pee.poy.98"><h4><i class="bi bi-facebook"></i></h4></i></a></li>
+              <li><a href="https://github.com/shanepai-14" class="link"><h4><i class="bi bi-github"></i></h4></a></li>
+              <li><a href="" class="link"><h4><i class="bi bi-linkedin"></i></h4></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
@@ -681,14 +710,33 @@
       // Replace with the actual path
 
       // Update other fields as needed
+      function coursefilename(courselected){
+ 
+        if(courselected == 'BS - Information Technology'){
+          return '-BSIT';
+        }
+        if(courselected == 'B - Secondary Education'){
+          return '-BSED';
+        }
+        if(courselected == 'B - Elementary Education'){
+          return '-BEED';
+        }
+        if(courselected == 'B - Arts in Theology'){
+          return '-ABTHEO';
+        }
+
+      }
 
       function exportAsImage() {
         html2canvas(document.getElementById("idCard"), { scale: 3 }).then(
           function (canvas) {
             var img = canvas.toDataURL("image/png");
             var link = document.createElement("a");
+            var currentcourse = course.value;
+            var finalcourse =  coursefilename(currentcourse);
+            
             link.href = img;
-            link.download = `${fullname.value + "-front"}.png`;
+            link.download = `${fullname.value +finalcourse+"-front"}.png`;
             link.click();
           }
         );
