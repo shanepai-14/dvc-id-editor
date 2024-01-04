@@ -5,6 +5,8 @@
 
 This web application is designed to make it easier to create student IDs for Davao Vision College. It allows users to quickly input student information and generate a customized ID card with a freely defined design. The generated card can then be exported as a PNG file for printing or sharing.
 
+![DVC-ID-EDITOR](images/demo.png)
+
 ## Technologies Used
 
 HTML: Forms the basic structure and content of the application.
