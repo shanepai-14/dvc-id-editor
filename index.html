@@ -31,8 +31,9 @@
   <body>
     <header class="mb-5 ">
       <nav>
-        <div class="container p-2">
+        <div class="container p-2 position-relative">
           <h3 class="text-center head-title slideanim">DVC ID EDITOR</h3>
+          <button  type="button" class="btn btn-info slideanim" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; right: 0; top:21%">Instruction</button>
         </div>
       </nav>
     </header>
@@ -296,15 +297,38 @@
           <div class="col">
             <p style="margin-bottom: 36px;"><strong>Social Media</strong></p>
             <ul class="list-unstyled footer-list d-flex gap-3">
-              <li><a href="https://www.facebook.com/pee.poy.98"><h4><i class="bi bi-facebook"></i></h4></i></a></li>
-              <li><a href="https://github.com/shanepai-14" class="link"><h4><i class="bi bi-github"></i></h4></a></li>
-              <li><a href="" class="link"><h4><i class="bi bi-linkedin"></i></h4></a></li>
+              <li><a href="https://www.facebook.com/pee.poy.98" target="_blank"><h4><i class="bi bi-facebook"></i></h4></i></a></li>
+              <li><a href="https://github.com/shanepai-14" class="link" target="_blank"><h4><i class="bi bi-github"></i></h4></a></li>
+              <li><a href="" class="link" target="_blank"><h4><i class="bi bi-linkedin"></i></h4></a></li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
 
+   
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog shadow">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Instruction</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          <ul >
+            <li class="mb-2">Mandatory Information: Ensure that all required input fields are filled before exporting. The application will prevent exporting if any mandatory fields are empty.</li>
+            <li >Image Background Removal: Remember to remove image backgrounds using <a href="https://www.remove.bg/upload" target="_blank">remove.bg</a> before uploading to ensure a professional-looking ID card.</li>
+          </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
       var fullname = document.getElementById("fullname");
@@ -736,7 +760,7 @@
             var finalcourse =  coursefilename(currentcourse);
             
             link.href = img;
-            link.download = `${fullname.value +finalcourse+"-front"}.png`;
+            link.download = `${fullname.value +finalcourse+"-FRONT"}.png`;
             link.click();
           }
         );
@@ -746,8 +770,10 @@
           function (canvas) {
             var img = canvas.toDataURL("image/png");
             var link = document.createElement("a");
+            var currentcourse = course.value;
+            var finalcourse =  coursefilename(currentcourse);
             link.href = img;
-            link.download = `${fullname.value + "-back"}.png`;
+            link.download = `${fullname.value +finalcourse+ "-BACK"}.png`;
             link.click();
           }
         );
@@ -903,7 +929,9 @@ function updateThumbnail(dropZoneElement, file,displayElementId) {
     thumbnailElement.style.backgroundImage = null;
   }
 }
-
+$(window).on('load', function() {
+  $('#exampleModal').modal('show');
+});
     </script>
   </body>
 </html>

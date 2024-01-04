@@ -356,3 +356,6 @@ label {
       transform: translateY(0);
     }
   }
+  .modal-backdrop {
+    opacity: 0!important;
+  }
