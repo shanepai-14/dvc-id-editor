@@ -20,6 +20,10 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
     <title>DVC ID Generator</title>
   </head>
@@ -34,7 +38,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 details-card">
-          <h3>Student Details</h3>
+          <h3>
+            Student Details &nbsp&nbsp&nbsp&nbsp&nbsp<i
+              class="bi bi-circle-fill"
+              style="color: green; font-size: 15px"
+              ><span> VALID</span></i
+            >
+            <i class="bi bi-circle-fill" style="color: red; font-size: 15px"
+              ><span> INVALID</span></i
+            >
+          </h3>
           <div class="input-group">
             <label for="fullname">Full name</label>
             <input
@@ -42,6 +55,7 @@
               class="input-details"
               name="fullname"
               id="fullname"
+              required
             />
           </div>
           <div class="input-group">
@@ -51,11 +65,23 @@
               class="input-details"
               name="idnumber"
               id="idnumber"
+              required
             />
           </div>
           <div class="input-group">
             <label for="bday">Birthday</label>
-            <input type="date" class="input-details" name="bday" id="bday" />
+            <!-- <input type="date" class="input-details" name="bday" id="bday" /> -->
+            <input
+              type="text"
+              class="input-details"
+              name="bday"
+              id="bday"
+              pattern="^[a-zA-Z]+\s\d{1,2},\s\d{4}$"
+              placeholder="(e.g., August 30, 1999)"
+              oninput="validateBirthday(event)"
+              maxlength="20"
+              required
+            />
           </div>
 
           <div class="input-group">
@@ -65,16 +91,20 @@
               class="input-details"
               name="guardian"
               id="guardian"
+              onkeydown="return isAlphabetic(event)"
+              required
             />
           </div>
           <div class="input-group">
             <label for="contactnumber">Contact Number</label>
             <input
-              type="number"
+              type="tel"
               class="input-details"
-              pattern="09\d{9}"
               name="contactnumber"
               id="contactnumber"
+              placeholder="(e.g., 0900-000-0000)"
+              pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+              required
             />
           </div>
           <div class="input-group">
@@ -84,19 +114,25 @@
               class="input-details"
               name="school-year"
               id="school-year"
+              required
             />
           </div>
           <div class="input-group">
             <label for="semester">Semester</label>
 
-            <select name="semester" class="input-details" id="semester">
+            <select
+              name="semester"
+              class="input-details"
+              id="semester"
+              required
+            >
               <option value="First Semester">First Semester</option>
               <option value="Second Semester">Second Semester</option>
             </select>
           </div>
           <div class="input-group">
             <label for="course">Course</label>
-            <select name="course" class="input-details" id="course">
+            <select name="course" class="input-details" id="course" required>
               <option value="BS - Information Technology">
                 BS - Information Technology
               </option>
@@ -109,13 +145,69 @@
               <option value="B - Arts in Theology">B - Arts in Theology</option>
             </select>
           </div>
-          <div class="input-group">
+          <!-- <div class="input-group">
             <label for="">Student Image </label>
-            <input type="file" id="studentImage" />
+            <input type="file" id="studentImage"  required/>
           </div>
           <div class="input-group">
             <label for="signatureImage">Signature Image </label>
-            <input type="file" id="signatureImage" />
+            <input type="file" id="signatureImage"   required/>
+          </div> -->
+
+          <div  class="input-group drop-area d-none"  
+          ondragover="handleDragOver(event)"
+          ondragleave="handleDragLeave(event)"
+          ondrop="handleDrop(event, 'studentImage')">
+            <label for="studentImage">Student Image</label>
+            <div
+              id="studentImageDrop"
+             
+            >
+              <p>Drag and drop or click to upload</p>
+            </div>
+            <input
+              type="file"
+              id="studentImage"
+              style="display: none"
+              onchange="handleFiles(this.files, 'studentImage')"
+            />
+          </div >
+
+          <div class="input-group drop-area d-none"  
+          ondragover="handleDragOver(event)"
+          ondragleave="handleDragLeave(event)"
+          ondrop="handleDrop(event, 'signatureImage')">
+            <label for="signatureImage">Signature Image</label>
+            <div
+              id="signatureImageDrop"
+            
+            >
+              <p>Drag and drop or click to upload</p>
+            </div>
+            <input
+              type="file"
+              id="signatureImage"
+              style="display: none"
+              onchange="handleFiles(this.files, 'signatureImage')"
+            />
+          </div>
+          <div class="row d-flex w-100 justify-content-between">
+         
+           <div class="col text-center">
+            <label for="" class="mb-1">Student Image</label>
+            <div class="drop-zone" data-display-element-id="previewStudentImage">
+             
+              <span class="drop-zone__prompt">Drop file here or click to upload</span>
+              <input type="file" name="myFile" class="drop-zone__input" id="dragstudentimage">
+            </div>
+           </div>
+          <div class="col text-center"> 
+            <label for="" class="mb-1">Student Signature</label>
+            <div class="drop-zone" data-display-element-id="previewSignatureImage">
+              <span class="drop-zone__prompt">Drop file here or click to upload</span>
+              <input type="file" name="myFile" class="drop-zone__input" id="dragsignature">
+            </div>
+          </div>
           </div>
         </div>
         <div
@@ -154,9 +246,28 @@
             </button>
           </div>
 
-          <div id="idCard backid" class="id-card position-relative">
+          <div id="backid" class="id-card position-relative">
             <img src="images/BACK.png" alt="" class="bg-back" />
-            <button class="btn position-absolute exportback">
+            <div class="school-year-container">
+              <p class="display-school-year" id="display-school-year">
+                A.Y. 2023-2024
+              </p>
+              <p class="display-semester" id="display-semester">
+                First Semester
+              </p>
+            </div>
+            <div class="guardian-details">
+              <p class="guardianname" id="guardianname">Guardian's Name</p>
+              <p>Mother</p>
+              <p class="displaycontact" id="displaycontact">0912-345-6789</p>
+            </div>
+            <div class="birth-container">
+              <p class="displaybirth" id="displaybirth"></p>
+            </div>
+            <button
+              class="btn position-absolute exportback"
+              onclick="exportAsImageBack()"
+            >
               Export Back
             </button>
           </div>
@@ -173,14 +284,35 @@
       var studentID = document.getElementById("studentID");
       var studentImage = document.getElementById("studentImage");
       var previewStudentImage = document.getElementById("previewStudentImage");
-      var signatureImage = document.getElementById("signatureImage");
+      var contactnumber = document.getElementById("contactnumber");
+      var displaycontact = document.getElementById("displaycontact");
+      var guardianname = document.getElementById("guardianname");
+      var guardian = document.getElementById("guardian");
+      var currentschoolyear = document.getElementById("school-year");
+      var displaySchoolYear = document.getElementById("display-school-year");
+      var displaysemester = document.getElementById("display-semester");
+      var semester = document.getElementById("semester");
+      var bday = document.getElementById("bday");
+      var displaybirth = document.getElementById("displaybirth");
       var previewSignatureImage = document.getElementById(
         "previewSignatureImage"
       );
-      var displaycourse = document.getElementById(
-        "displaycourse"
-      );
+      var displaycourse = document.getElementById("displaycourse");
       var course = document.getElementById("course");
+
+      bday.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displaybirth.textContent = bday.value;
+      });
+      semester.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displaysemester.textContent = semester.value;
+      });
+      currentschoolyear.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displaySchoolYear.textContent = "A.Y. " + currentschoolyear.value;
+      });
+
       course.addEventListener("input", function () {
         // Update the content of the output element in real-time
         displaycourse.textContent = course.value;
@@ -192,6 +324,14 @@
       idnumber.addEventListener("input", function () {
         // Update the content of the output element in real-time
         studentID.textContent = "ID No.: " + idnumber.value;
+      });
+      contactnumber.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displaycontact.textContent = contactnumber.value;
+      });
+      guardian.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        guardianname.textContent = guardian.value;
       });
 
       studentImage.addEventListener("change", function () {
@@ -247,6 +387,7 @@
         }
 
         // Save data to local storage
+
         localStorage.setItem("schoolYear", schoolYearInput.value);
         localStorage.setItem("semester", semesterInput.value);
         localStorage.setItem("course", courseInput.value);
@@ -258,11 +399,18 @@
         var courseInput = document.getElementById("course");
 
         // Load data from local storage
+        console.log(schoolYearInput.value);
         schoolYearInput.value = localStorage.getItem("schoolYear") || "";
         semesterInput.value =
           localStorage.getItem("semester") || "First Semester";
 
         courseInput.value =
+          localStorage.getItem("course") || "BS - Information Technology";
+        displaySchoolYear.textContent =
+          "A.Y. " + localStorage.getItem("schoolYear") || "";
+        displaysemester.textContent =
+          localStorage.getItem("semester") || "First Semester";
+        displaycourse.textContent =
           localStorage.getItem("course") || "BS - Information Technology";
       }
 
@@ -545,8 +693,169 @@
           }
         );
       }
+      function exportAsImageBack() {
+        html2canvas(document.getElementById("backid"), { scale: 3 }).then(
+          function (canvas) {
+            var img = canvas.toDataURL("image/png");
+            var link = document.createElement("a");
+            link.href = img;
+            link.download = `${fullname.value + "-back"}.png`;
+            link.click();
+          }
+        );
+      }
+      function isAlphabetic(event) {
+        // Check if the pressed key is an alphabetic character
+        return (
+          /[a-zA-Z]/.test(event.key) || event.key === " " || event.key === "."
+        );
+      }
 
-      window.onload = enhanceAndDisplay;
+      function validatePhoneNumber(event) {
+        var input = event.target;
+        var pattern = /^\d{0,4}-\d{0,3}-\d{0,4}$/;
+
+        if (!pattern.test(input.value)) {
+          // Clear the input if it doesn't match the pattern
+          input.setCustomValidity(
+            "Invalid phone number format. Please use the format: 0932-232-2323"
+          );
+          return false; // Prevent the input
+        } else {
+          input.setCustomValidity(""); // Reset custom validity
+          return true; // Allow the input
+        }
+      }
+      function validateBirthday(event) {
+        var input = event.target;
+        var pattern = /^[a-zA-Z]+\s\d{1,2},\s\d{4}$/;
+
+        if (!pattern.test(input.value)) {
+          input.setCustomValidity(
+            "Invalid birthday format. Please use the format: Month day, year"
+          );
+        } else {
+          input.setCustomValidity("");
+        }
+      }
+      // window.onload = enhanceAndDisplay;
+    </script>
+    <script>
+      function handleDragOver(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.target.classList.add("highlight");
+      }
+
+      function handleDragLeave(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        event.target.classList.remove("highlight");
+      }
+
+      function handleDrop(event, inputId) {
+        event.preventDefault();
+        event.stopPropagation();
+        const dropArea = document.getElementById(`${inputId}Drop`);
+        dropArea.classList.remove("highlight");
+
+        const files = event.dataTransfer.files;
+        const fileInput = document.getElementById(inputId);
+        fileInput.files = files;
+        handleFiles(files, inputId);
+      }
+
+      function handleFiles(files, inputId) {
+        if (files.length > 0) {
+          const file = files[0];
+          // Handle the file, e.g., upload or display information
+          console.log(`File for ${inputId}:`, file.name);
+          console.log("File size:", file.size);
+          console.log("File type:", file.type);
+        }
+      }
+    </script>
+    <script>
+      document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+  const dropZoneElement = inputElement.closest(".drop-zone");
+  const displayElementId = dropZoneElement.dataset.displayElementId;
+  dropZoneElement.addEventListener("click", (e) => {
+    inputElement.click();
+  });
+
+  inputElement.addEventListener("change", (e) => {
+    if (inputElement.files.length) {
+      updateThumbnail(dropZoneElement, inputElement.files[0]);
+    }
+  });
+
+  dropZoneElement.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZoneElement.classList.add("drop-zone--over");
+  });
+
+  ["dragleave", "dragend"].forEach((type) => {
+    dropZoneElement.addEventListener(type, (e) => {
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+
+  dropZoneElement.addEventListener("drop", (e) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.files.length) {
+      inputElement.files = e.dataTransfer.files;
+      updateThumbnail(dropZoneElement, e.dataTransfer.files[0],displayElementId);
+    }
+
+    dropZoneElement.classList.remove("drop-zone--over");
+  });
+});
+
+/**
+ * Updates the thumbnail on a drop zone element.
+ *
+ * @param {HTMLElement} dropZoneElement
+ * @param {File} file
+ */
+function updateThumbnail(dropZoneElement, file,displayElementId) {
+  let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+  // First time - remove the prompt
+  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+    dropZoneElement.querySelector(".drop-zone__prompt").remove();
+  }
+
+  // First time - there is no thumbnail element, so lets create it
+  if (!thumbnailElement) {
+    thumbnailElement = document.createElement("div");
+    thumbnailElement.classList.add("drop-zone__thumb");
+    dropZoneElement.appendChild(thumbnailElement);
+  }
+
+  thumbnailElement.dataset.label = file.name;
+
+  // Show thumbnail for image files
+  if (file.type.startsWith("image/")) {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      
+      thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+      if(displayElementId === 'previewStudentImage'){
+        previewStudentImage.src = reader.result;
+      }
+      if(displayElementId === 'previewSignatureImage'){
+        enhanceAndDisplay(reader.result);
+      }
+      
+    };
+  } else {
+    thumbnailElement.style.backgroundImage = null;
+  }
+}
+
     </script>
   </body>
 </html>
