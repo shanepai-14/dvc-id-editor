@@ -304,6 +304,11 @@ label {
 .link {
     text-decoration: none;
 }
+.instruction{
+  position: absolute; 
+  right: 0;
+   top:21%;
+}
 @media (max-width: 768px){
     .display-container{
         flex-direction: column;
@@ -318,6 +323,13 @@ label {
     .details-card{
         margin-bottom: 20px;
     }
+}
+@media (max-width: 980px){
+
+  .instruction{
+    position: relative;
+    float: right;
+  }
 }
 @keyframes slide-down {
     0% {
