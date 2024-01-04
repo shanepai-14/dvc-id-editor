@@ -20,163 +20,134 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="./css/styles.css" />
     <title>DVC ID Generator</title>
-    <style>
-      @font-face {
-        font-family: "ClarendonBT"; /* Specify a unique font family name */
-        src: url("./fonts/ClarendonBT-Black.otf") format("woff2");
-
-        /* Add additional font formats if necessary */
-      }
-      body {
-        font-family: "Aleo", serif;
-        background-color: antiquewhite;
-      }
-      .id-card {
-        width: 337px;
-        height: 530px;
-       
-      }
-
-      .profile-image {
-        width: 52%;
-        height: 33.6%;
-        object-fit: cover;
-        border-radius: 7px;
-        position: absolute;
-        border: 2px solid black;
-        top: 36.9%;
-        left: 25%;
-      }
-      #studentID {
-        font-size: 30px;
-        text-align: center;
-      }
-      #studentName {
-        text-align: center;
-        font-size: 46px;
-        font-family: "ClarendonBT";
-      }
-      .name {
-        position: absolute;
-        width: 100%;
-        bottom: 19.2%;
-      }
-      .idnumber {
-        position: absolute;
-        width: 100%;
-        bottom: 8.2%;
-      }
-      .signature {
-        filter: grayscale(100%);
-      }
-      .sig-con img {
-        width: 200px;
-
-        align-items: center;
-      }
-      .sig-con {
-        width: 100%;
-        height: 158px;
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-      }
-      .bg {
-        width: 100%;
-      }
-      .bg-back {
-        width: 100%;
-        height: 100%;
-        background-image: url(./images/BACK.png);
-
-        z-index: 1;
-      }
-      .exportfront {
-        bottom: -10%;
-        left: 30%;
-      }
-      .exportback {
-        bottom: -10%;
-        left: 30%;
-      }
-    </style>
   </head>
   <body>
-    <header class="mb-5 bg-success-subtle">
+    <header class="mb-5">
       <nav>
         <div class="container p-2">
-          <h3 class="text-center">DVC ID EDITOR</h3>
+          <h3 class="text-center head-title">DVC ID EDITOR</h3>
         </div>
       </nav>
     </header>
     <div class="container">
       <div class="row">
-        <div class="col-4">
+        <div class="col-md-4 details-card">
           <h3>Student Details</h3>
           <div class="input-group">
-            <label for="">Full name</label>
-            <input type="text" />
+            <label for="fullname">Full name</label>
+            <input
+              type="text"
+              class="input-details"
+              name="fullname"
+              id="fullname"
+            />
           </div>
           <div class="input-group">
-            <label for="">Id number</label>
-            <input type="number" />
+            <label for="idnumber">Id number</label>
+            <input
+              type="number"
+              class="input-details"
+              name="idnumber"
+              id="idnumber"
+            />
           </div>
           <div class="input-group">
-            <label for="">Birthday</label>
-            <input type="date" />
+            <label for="bday">Birthday</label>
+            <input type="date" class="input-details" name="bday" id="bday" />
+          </div>
+
+          <div class="input-group">
+            <label for="guardian">Guardian's name</label>
+            <input
+              type="text"
+              class="input-details"
+              name="guardian"
+              id="guardian"
+            />
           </div>
           <div class="input-group">
-            <label for="">Course</label>
-            <input type="text" />
+            <label for="contactnumber">Contact Number</label>
+            <input
+              type="number"
+              class="input-details"
+              pattern="09\d{9}"
+              name="contactnumber"
+              id="contactnumber"
+            />
           </div>
           <div class="input-group">
-            <label for="">Guardian's name</label>
-            <input type="text" />
+            <label for="school-year">School-Year</label>
+            <input
+              type="text"
+              class="input-details"
+              name="school-year"
+              id="school-year"
+            />
           </div>
           <div class="input-group">
-            <label for="">Contact Number</label>
-            <input type="text" />
+            <label for="semester">Semester</label>
+
+            <select name="semester" class="input-details" id="semester">
+              <option value="First Semester">First Semester</option>
+              <option value="Second Semester">Second Semester</option>
+            </select>
           </div>
           <div class="input-group">
-            <label for="">Image </label>
-            <input type="file" />
+            <label for="course">Course</label>
+            <select name="course" class="input-details" id="course">
+              <option value="BS - Information Technology">
+                BS - Information Technology
+              </option>
+              <option value="B - Secondary Education">
+                B - Secondary Education
+              </option>
+              <option value="B - Elementary Education">
+                B - Elementary Education
+              </option>
+              <option value="B - Arts in Theology">B - Arts in Theology</option>
+            </select>
           </div>
           <div class="input-group">
-            <label for="">Signature </label>
-            <input type="file" />
+            <label for="">Student Image </label>
+            <input type="file" id="studentImage" />
+          </div>
+          <div class="input-group">
+            <label for="signatureImage">Signature Image </label>
+            <input type="file" id="signatureImage" />
           </div>
         </div>
-        <div class="col-8 d-flex justify-content-evenly align-content-center">
+        <div
+          class="col-md-8 d-flex justify-content-evenly align-content-center"
+        >
           <div id="idCard" class="id-card position-relative">
             <img src="./images/FRONT.png" alt="" class="bg" />
             <img
-              id="profileImage"
+              id="previewStudentImage"
               class="profile-image"
-              src="./kim.jpg"
+              src="./images/student.png"
               alt="Profile Image"
             />
-
-            <!-- <div class="name">
-              <h2 id="studentName">John Doe</h2>
+            <div class="name">
+              <h2 id="displayname"></h2>
             </div>
-            <div class="idnumber">
+            <div class="course-container">
+              <h2 id="displaycourse">BSIT</h2>
+            </div>
+            <div class="idnumber-container">
               <p id="studentID"></p>
             </div>
             <div class="sig-con">
               <img
-                src="./signa.png"
+                src="./images/signaturesample-removebg-preview.png"
                 alt="signature"
-                class="signature"
-                id="signature"
+                class="previewSignatureImage"
+                id="previewSignatureImage"
               />
-            </div>  -->
-
+            </div>
             <button
-              class="btn btn-secondary position-absolute exportfront"
+              class="btn position-absolute exportfront"
               onclick="exportAsImage()"
             >
               Export Front
@@ -185,7 +156,7 @@
 
           <div id="idCard backid" class="id-card position-relative">
             <img src="images/BACK.png" alt="" class="bg-back" />
-            <button class="btn btn-secondary position-absolute exportback">
+            <button class="btn position-absolute exportback">
               Export Back
             </button>
           </div>
@@ -196,25 +167,129 @@
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
+      var fullname = document.getElementById("fullname");
+      var displayname = document.getElementById("displayname");
+      var idnumber = document.getElementById("idnumber");
+      var studentID = document.getElementById("studentID");
+      var studentImage = document.getElementById("studentImage");
+      var previewStudentImage = document.getElementById("previewStudentImage");
+      var signatureImage = document.getElementById("signatureImage");
+      var previewSignatureImage = document.getElementById(
+        "previewSignatureImage"
+      );
+      var displaycourse = document.getElementById(
+        "displaycourse"
+      );
+      var course = document.getElementById("course");
+      course.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displaycourse.textContent = course.value;
+      });
+      fullname.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        displayname.textContent = fullname.value;
+      });
+      idnumber.addEventListener("input", function () {
+        // Update the content of the output element in real-time
+        studentID.textContent = "ID No.: " + idnumber.value;
+      });
+
+      studentImage.addEventListener("change", function () {
+        // Check if a file is selected
+        if (studentImage.files && studentImage.files[0]) {
+          // Create a FileReader to read the selected file
+          var reader = new FileReader();
+
+          // Set up the FileReader to update the image source when the file is loaded
+          reader.onload = function (e) {
+            previewStudentImage.src = e.target.result;
+          };
+
+          // Read the selected file as a data URL
+          reader.readAsDataURL(studentImage.files[0]);
+        } else {
+          // If no file is selected, display the default image
+          previewStudentImage.src = "./images/student.png";
+        }
+      });
+      signatureImage.addEventListener("change", function () {
+        // Check if a file is selected
+        if (signatureImage.files && signatureImage.files[0]) {
+          // Create a FileReader to read the selected file
+          var reader = new FileReader();
+
+          // Set up the FileReader to update the image source when the file is loaded
+          reader.onload = function (e) {
+            // previewSignatureImage.src = e.target.result;
+            var imageSource = e.target.result;
+
+            // Call the enhanceAndDisplay function with the image source
+            enhanceAndDisplay(imageSource);
+          };
+
+          // Read the selected file as a data URL
+          reader.readAsDataURL(signatureImage.files[0]);
+        } else {
+          // If no file is selected, display the default image
+          previewSignatureImage.src = "./images/student.png";
+        }
+      });
+      function saveFormData() {
+        var schoolYearInput = document.getElementById("school-year");
+        var semesterInput = document.getElementById("semester");
+        var courseInput = document.getElementById("course");
+
+        // Validate school-year format (e.g., 2023-2024)
+        var schoolYearPattern = /^\d{4}-\d{4}$/;
+        if (!schoolYearPattern.test(schoolYearInput.value)) {
+          console.log("invalid school-year format");
+          return; // Do not save if the format is invalid
+        }
+
+        // Save data to local storage
+        localStorage.setItem("schoolYear", schoolYearInput.value);
+        localStorage.setItem("semester", semesterInput.value);
+        localStorage.setItem("course", courseInput.value);
+        console.log("Form data saved!");
+      }
+      function loadFormData() {
+        var schoolYearInput = document.getElementById("school-year");
+        var semesterInput = document.getElementById("semester");
+        var courseInput = document.getElementById("course");
+
+        // Load data from local storage
+        schoolYearInput.value = localStorage.getItem("schoolYear") || "";
+        semesterInput.value =
+          localStorage.getItem("semester") || "First Semester";
+
+        courseInput.value =
+          localStorage.getItem("course") || "BS - Information Technology";
+      }
+
+      document
+        .getElementById("school-year")
+        .addEventListener("input", saveFormData);
+      document
+        .getElementById("semester")
+        .addEventListener("input", saveFormData);
+      document.getElementById("course").addEventListener("input", saveFormData);
+
+      loadFormData();
       // Student data (replace this with actual data)
-      const studentData = {
-        name: "Kim Brian S. Tilandoca",
-        id: "ID No.: 000929",
-        // Add more fields as needed
-      };
-      var signatureImage = document.getElementById("signature");
-      signatureImage.src = "./signa.png";
-      function enhanceAndDisplay() {
+
+      function enhanceAndDisplay(imageSource) {
         // Create an image object to work with
         var image = new Image();
-        image.src = signatureImage.src;
+        image.src = imageSource;
 
         image.onload = function () {
           // Enhance the signature
           var enhancedDataURL = enhanceSignature(image);
 
           // Display the enhanced image in another img tag
-          var enhancedSignatureImage = document.getElementById("signature");
+          var enhancedSignatureImage = document.getElementById(
+            "previewSignatureImage"
+          );
           enhancedSignatureImage.src = enhancedDataURL;
         };
       }
@@ -251,6 +326,121 @@
       //   return canvas.toDataURL("image/png");
       // }
 
+      // function enhanceSignature(image) {
+      //   // Create a canvas to work with
+      //   var canvas = document.createElement("canvas");
+      //   var ctx = canvas.getContext("2d");
+      //   canvas.width = image.width;
+      //   canvas.height = image.height;
+
+      //   // Draw the original image on the canvas
+      //   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      //   // Get image data
+      //   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      //   var data = imageData.data;
+
+      //   // Enhance signature lines (by making it more black)
+      //   for (var i = 0; i < data.length; i += 4) {
+      //     if (data[i + 3] > 0) {
+      //       // If the pixel is not transparent, make it completely black
+      //       data[i] = 0; // Red
+      //       data[i + 1] = 0; // Green
+      //       data[i + 2] = 0; // Blue
+      //     }
+      //   }
+
+      //   // Put the modified image data back to the canvas
+      //   ctx.putImageData(imageData, 0, 0);
+
+      //   // Create a temporary canvas to simulate a thicker stroke
+      //   var tempCanvas = document.createElement("canvas");
+      //   var tempCtx = tempCanvas.getContext("2d");
+      //   tempCanvas.width = image.width;
+      //   tempCanvas.height = image.height;
+
+      //   // Draw the modified image on the temporary canvas with an offset to simulate a thicker stroke
+      //   tempCtx.drawImage(canvas, 1, 1, canvas.width, canvas.height);
+      //   ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+      //   // Draw the modified image on the main canvas again to cover the original lines
+      //   ctx.drawImage(tempCanvas, 1, 1, canvas.width, canvas.height);
+
+      //   return canvas.toDataURL("image/png");
+      // }
+
+      //       function enhanceSignature(image) {
+      //   // Create a canvas to work with
+      //   var canvas = document.createElement("canvas");
+      //   var ctx = canvas.getContext("2d");
+      //   canvas.width = image.width;
+      //   canvas.height = image.height;
+
+      //   // Draw the original image on the canvas
+      //   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      //   // Get image data
+      //   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      //   var data = imageData.data;
+
+      //   // Find the non-transparent boundaries of the image
+      //   var minX = canvas.width;
+      //   var minY = canvas.height;
+      //   var maxX = -1;
+      //   var maxY = -1;
+
+      //   for (var y = 0; y < canvas.height; y++) {
+      //     for (var x = 0; x < canvas.width; x++) {
+      //       var index = (y * canvas.width + x) * 4;
+
+      //       if (data[index + 3] > 0) {
+      //         minX = Math.min(minX, x);
+      //         minY = Math.min(minY, y);
+      //         maxX = Math.max(maxX, x);
+      //         maxY = Math.max(maxY, y);
+      //       }
+      //     }
+      //   }
+
+      //   // Calculate the width and height of the non-transparent region
+      //   var width = maxX - minX + 1;
+      //   var height = maxY - minY + 1;
+
+      //   // Create a new canvas with the dimensions of the non-transparent region
+      //   var croppedCanvas = document.createElement("canvas");
+      //   var croppedCtx = croppedCanvas.getContext("2d");
+      //   croppedCanvas.width = width;
+      //   croppedCanvas.height = height;
+
+      //   // Draw the non-transparent region onto the new canvas
+      //   croppedCtx.drawImage(
+      //     canvas,
+      //     minX,
+      //     minY,
+      //     width,
+      //     height,
+      //     0,
+      //     0,
+      //     width,
+      //     height
+      //   );
+
+      //   // Enhance signature lines on the cropped image (by making it more black)
+      //   var croppedImageData = croppedCtx.getImageData(0, 0, width, height);
+      //   var croppedData = croppedImageData.data;
+
+      //   for (var i = 0; i < croppedData.length; i += 4) {
+      //     if (croppedData[i + 3] > 0) {
+      //       croppedData[i] = 0; // Red
+      //       croppedData[i + 1] = 0; // Green
+      //       croppedData[i + 2] = 0; // Blue
+      //     }
+      //   }
+
+      //   // Put the modified image data back to the cropped canvas
+
+      //   // Return the enhanced and cropped image as a data URL
+      //   return croppedCanvas.toDataURL("image/png");
+      // }
       function enhanceSignature(image) {
         // Create a canvas to work with
         var canvas = document.createElement("canvas");
@@ -265,37 +455,83 @@
         var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         var data = imageData.data;
 
-        // Enhance signature lines (by making it more black)
-        for (var i = 0; i < data.length; i += 4) {
-          if (data[i + 3] > 0) {
-            // If the pixel is not transparent, make it completely black
-            data[i] = 0; // Red
-            data[i + 1] = 0; // Green
-            data[i + 2] = 0; // Blue
+        // Find the non-transparent boundaries of the image
+        var minX = canvas.width;
+        var minY = canvas.height;
+        var maxX = -1;
+        var maxY = -1;
+
+        for (var y = 0; y < canvas.height; y++) {
+          for (var x = 0; x < canvas.width; x++) {
+            var index = (y * canvas.width + x) * 4;
+
+            if (data[index + 3] > 0) {
+              minX = Math.min(minX, x);
+              minY = Math.min(minY, y);
+              maxX = Math.max(maxX, x);
+              maxY = Math.max(maxY, y);
+            }
           }
         }
 
-        // Put the modified image data back to the canvas
-        ctx.putImageData(imageData, 0, 0);
+        // Calculate the width and height of the non-transparent region
+        var width = maxX - minX + 1;
+        var height = maxY - minY + 1;
+
+        // Create a new canvas with the dimensions of the non-transparent region
+        var croppedCanvas = document.createElement("canvas");
+        var croppedCtx = croppedCanvas.getContext("2d");
+        croppedCanvas.width = width;
+        croppedCanvas.height = height;
+
+        // Draw the non-transparent region onto the new canvas
+        croppedCtx.drawImage(
+          canvas,
+          minX,
+          minY,
+          width,
+          height,
+          0,
+          0,
+          width,
+          height
+        );
+
+        // Enhance signature lines on the cropped image (by making it more black)
+        var croppedImageData = croppedCtx.getImageData(0, 0, width, height);
+        var croppedData = croppedImageData.data;
+
+        for (var i = 0; i < croppedData.length; i += 4) {
+          if (croppedData[i + 3] > 0) {
+            croppedData[i] = 0; // Red
+            croppedData[i + 1] = 0; // Green
+            croppedData[i + 2] = 0; // Blue
+          }
+        }
+
+        // Put the modified image data back to the cropped canvas
+        croppedCtx.putImageData(croppedImageData, 0, 0);
 
         // Create a temporary canvas to simulate a thicker stroke
         var tempCanvas = document.createElement("canvas");
         var tempCtx = tempCanvas.getContext("2d");
-        tempCanvas.width = image.width;
-        tempCanvas.height = image.height;
+        tempCanvas.width = width;
+        tempCanvas.height = height;
 
-        // Draw the modified image on the temporary canvas with an offset to simulate a thicker stroke
-        tempCtx.drawImage(canvas, 1, 1, canvas.width, canvas.height);
-        ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+        // Draw the cropped image on the temporary canvas with an offset to simulate a thicker stroke
+        tempCtx.drawImage(croppedCanvas, 1, 1, width - 2, height - 2);
+        croppedCtx.drawImage(tempCanvas, 0, 0, width, height);
+
         // Draw the modified image on the main canvas again to cover the original lines
-        ctx.drawImage(tempCanvas, 1, 1, canvas.width, canvas.height);
-
-        return canvas.toDataURL("image/png");
+        croppedCtx.drawImage(tempCanvas, 1, 1, width - 2, height - 2);
+        croppedCtx.drawImage(tempCanvas, 3, 3, width - 2, height - 2);
+        croppedCtx.drawImage(tempCanvas, 4, 4, width - 2, height - 2);
+        // Return the enhanced and duplicated image as a data URL
+        return croppedCanvas.toDataURL("image/png");
       }
 
-      document.getElementById("profileImage").src = "./kim.jpg"; // Replace with the actual path
-      document.getElementById("studentName").innerText = studentData.name;
-      document.getElementById("studentID").innerText = `${studentData.id}`;
+      // Replace with the actual path
+
       // Update other fields as needed
 
       function exportAsImage() {
@@ -304,7 +540,7 @@
             var img = canvas.toDataURL("image/png");
             var link = document.createElement("a");
             link.href = img;
-            link.download = `${studentData.name}.png`;
+            link.download = `${fullname.value + "-front"}.png`;
             link.click();
           }
         );
