@@ -1,9 +1,10 @@
 @font-face {
   font-family: "ClarendonBT"; /* Specify a unique font family name */
-  src: url("../fonts/ClarendonBT-Black.otf") format("woff2");
+  src: url("../fonts/ClarendonBT-Black.otf") format("opentype");
+
 
   font-family: "Bookman"; /* Specify a unique font family name */
-  src: url("../fonts/bookman\ old\ style.ttf") format("woff2");
+  src: url("../fonts/bookman\ old\ style.ttf") format("truetype");
   /* Add additional font formats if necessary */
 }
 
