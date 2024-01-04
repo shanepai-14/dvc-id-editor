@@ -335,7 +335,8 @@
       var displayname = document.getElementById("displayname");
       var idnumber = document.getElementById("idnumber");
       var studentID = document.getElementById("studentID");
-      var studentImage = document.getElementById("studentImage");
+      var studentImage = document.getElementById("dragstudentimage");
+      var  signatureImage= document.getElementById("dragsignature");
       var previewStudentImage = document.getElementById("previewStudentImage");
       var contactnumber = document.getElementById("contactnumber");
       var displaycontact = document.getElementById("displaycontact");
@@ -347,6 +348,7 @@
       var semester = document.getElementById("semester");
       var bday = document.getElementById("bday");
       var displaybirth = document.getElementById("displaybirth");
+    
       var previewSignatureImage = document.getElementById(
         "previewSignatureImage"
       );
@@ -387,46 +389,46 @@
         guardianname.textContent = guardian.value;
       });
 
-      // studentImage.addEventListener("change", function () {
-      //   // Check if a file is selected
-      //   if (studentImage.files && studentImage.files[0]) {
-      //     // Create a FileReader to read the selected file
-      //     var reader = new FileReader();
+      studentImage.addEventListener("change", function () {
+        // Check if a file is selected
+        if (studentImage.files && studentImage.files[0]) {
+          // Create a FileReader to read the selected file
+          var reader = new FileReader();
 
-      //     // Set up the FileReader to update the image source when the file is loaded
-      //     reader.onload = function (e) {
-      //       previewStudentImage.src = e.target.result;
-      //     };
+          // Set up the FileReader to update the image source when the file is loaded
+          reader.onload = function (e) {
+            previewStudentImage.src = e.target.result;
+          };
 
-      //     // Read the selected file as a data URL
-      //     reader.readAsDataURL(studentImage.files[0]);
-      //   } else {
-      //     // If no file is selected, display the default image
-      //     previewStudentImage.src = "./images/student.png";
-      //   }
-      // });
-      // signatureImage.addEventListener("change", function () {
-      //   // Check if a file is selected
-      //   if (signatureImage.files && signatureImage.files[0]) {
-      //     // Create a FileReader to read the selected file
-      //     var reader = new FileReader();
+          // Read the selected file as a data URL
+          reader.readAsDataURL(studentImage.files[0]);
+        } else {
+          // If no file is selected, display the default image
+          previewStudentImage.src = "./images/student.png";
+        }
+      });
+      signatureImage.addEventListener("change", function () {
+        // Check if a file is selected
+        if (signatureImage.files && signatureImage.files[0]) {
+          // Create a FileReader to read the selected file
+          var reader = new FileReader();
 
-      //     // Set up the FileReader to update the image source when the file is loaded
-      //     reader.onload = function (e) {
-      //       // previewSignatureImage.src = e.target.result;
-      //       var imageSource = e.target.result;
+          // Set up the FileReader to update the image source when the file is loaded
+          reader.onload = function (e) {
+            // previewSignatureImage.src = e.target.result;
+            var imageSource = e.target.result;
 
-      //       // Call the enhanceAndDisplay function with the image source
-      //       enhanceAndDisplay(imageSource);
-      //     };
+            // Call the enhanceAndDisplay function with the image source
+            enhanceAndDisplay(imageSource);
+          };
 
-      //     // Read the selected file as a data URL
-      //     reader.readAsDataURL(signatureImage.files[0]);
-      //   } else {
-      //     // If no file is selected, display the default image
-      //     previewSignatureImage.src = "./images/student.png";
-      //   }
-      // });
+          // Read the selected file as a data URL
+          reader.readAsDataURL(signatureImage.files[0]);
+        } else {
+          // If no file is selected, display the default image
+          previewSignatureImage.src = "./images/student.png";
+        }
+      });
       function saveFormData() {
         var schoolYearInput = document.getElementById("school-year");
         var semesterInput = document.getElementById("semester");
@@ -814,41 +816,7 @@
       }
       // window.onload = enhanceAndDisplay;
     </script>
-    <script>
-      function handleDragOver(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.classList.add("highlight");
-      }
-
-      function handleDragLeave(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.classList.remove("highlight");
-      }
-
-      function handleDrop(event, inputId) {
-        event.preventDefault();
-        event.stopPropagation();
-        const dropArea = document.getElementById(`${inputId}Drop`);
-        dropArea.classList.remove("highlight");
-
-        const files = event.dataTransfer.files;
-        const fileInput = document.getElementById(inputId);
-        fileInput.files = files;
-        handleFiles(files, inputId);
-      }
-
-      function handleFiles(files, inputId) {
-        if (files.length > 0) {
-          const file = files[0];
-          // Handle the file, e.g., upload or display information
-          console.log(`File for ${inputId}:`, file.name);
-          console.log("File size:", file.size);
-          console.log("File type:", file.type);
-        }
-      }
-    </script>
+    
     <script>
       document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
   const dropZoneElement = inputElement.closest(".drop-zone");
